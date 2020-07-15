@@ -28,6 +28,7 @@ int main(void)
   }
   catch (const SMCError &e) {
     std::cerr << "Could not set control mode of fans: are you running as root?" << std::endl;
+    exit(1);
   }
 
   signal(SIGINT, sighand);
