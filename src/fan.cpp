@@ -4,8 +4,8 @@ Fan::Fan(int index)
   : selector(char(index+48)), control_mode(false)
 {
 
-  // GEt this fan's minimum RPM
-  char key[5] = {'F', 'M', selector, 'n'};
+  // Get this fan's minimum RPM
+  char key[5] = {'F', selector, 'M', 'n'};
   this->min = this->smc.read(key);
 
   // Get this fan's maximum RPM
@@ -30,7 +30,7 @@ void Fan::set_control_mode(bool value)
   if (value == this->control_mode)
     return;
 
-  char key[5] = {'F', 'M', this->selector, 'd'};
+  char key[5] = {'F', this->selector, 'M', 'd'};
 
   try {
     // Set control mode of the fan: 0 is auto, 1 is manual.
@@ -53,6 +53,6 @@ void Fan::set_target(double target)
 
   this->target = target;
 
-  char key[5] = {'F', 'M', selector, 'd'};
+  char key[5] = {'F', selector, 'T', 'g'};
   this->smc.write(key, target);
 }
