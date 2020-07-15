@@ -1,8 +1,19 @@
 #include <iostream>
+#include <atomic>
+#include <signal.h>
+
 #include <smcpp/smc.hpp>
 
 #include "fan.hpp"
 #include "pid.hpp"
+
+std::atomic<bool> running(true);
+
+void sighand(int signo)
+{
+  (void) signo;
+  running.store(false);
+}
 
 int main(void)
 {
@@ -19,7 +30,9 @@ int main(void)
     std::cerr << "Could not set control mode of fans: are you running as root?" << std::endl;
   }
 
-  while (true) {
+  signal(SIGINT, sighand);
+
+  while (running.load()) {
     double cpu_temp = 0.0;
     cpu_temp += smc.read("TC1C");
     cpu_temp += smc.read("TC2C");
