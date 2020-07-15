@@ -63,4 +63,6 @@ int main(void)
 
     usleep(2000000);
   }
+
+  std::cerr << "Fan controller exiting." << std::endl;
 }
