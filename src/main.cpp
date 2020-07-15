@@ -48,8 +48,8 @@ int main(void)
 
     f0.set_target(fan_speed);
     f1.set_target(fan_speed);
-    usleep(1000000);
     double f0_target = f0.set_target(fan_speed);
     double f1_target = f1.set_target(fan_speed);
+    usleep(2000000);
   }
 }
