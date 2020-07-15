@@ -44,12 +44,16 @@ int main(void)
     cpu_temp /= 4.0;
     double fan_speed = pidc.get_ca(cpu_temp);
 
-    std::cerr << cpu_temp << "ºC " << fan_speed << " RPM" << std::endl;
-
-    f0.set_target(fan_speed);
-    f1.set_target(fan_speed);
     double f0_target = f0.set_target(fan_speed);
     double f1_target = f1.set_target(fan_speed);
+    std::cerr
+      << cpu_temp << ", "
+      << double(smc.read("F0Ac")) << ", "
+      << double(smc.read("F1Ac")) << ", "
+      << f0_target << ", "
+      << f1_target << ", "
+      << std::endl;
+
     usleep(2000000);
   }
 }
