@@ -2,7 +2,7 @@ CXX = clang++
 CFLAGS = -Wall -Wextra -Werror -std=c++17 -O2
 
 HDR =
-OBJ = obj/pid.o obj/util.o
+OBJ = obj/pid.o obj/util.o obj/fan.o
 LINK = -lpthread -lsmcpp
 FRMWK = -framework IOKit
 DEFS =
