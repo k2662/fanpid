@@ -1,0 +1,8 @@
+*.o
+*.un~
+.DS_Store
+tags
+smctool
+tests
+*_old*
+*.so
