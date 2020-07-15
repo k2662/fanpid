@@ -15,6 +15,12 @@ void sighand(int signo)
   running.store(false);
 }
 
+double interp(double T, double Tlo, double Thi, double Wlo, double Whi)
+{
+  double m = (Whi - Wlo)/(Thi - Tlo);
+  return Wlo + m*(T-Tlo);
+}
+
 int main(void)
 {
   SMC smc;
@@ -42,7 +48,8 @@ int main(void)
     cpu_temp += smc.read("TC3C");
     cpu_temp += smc.read("TC4C");
     cpu_temp /= 4.0;
-    double fan_speed = pidc.get_ca(cpu_temp);
+    double fan_speed = interp(cpu_temp, 40, 80, 1000, 7000);
+    //pidc.get_ca(cpu_temp);
 
     double f0_target = f0.set_target(fan_speed);
     double f1_target = f1.set_target(fan_speed);
