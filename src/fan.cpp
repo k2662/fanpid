@@ -43,7 +43,7 @@ void Fan::set_control_mode(bool value)
   this->control_mode = value;
 }
 
-void Fan::set_target(double target)
+double Fan::set_target(double target)
 {
   if (target < this->min)
     target = this->min;
@@ -55,4 +55,6 @@ void Fan::set_target(double target)
 
   char key[5] = {'F', selector, 'T', 'g'};
   this->smc.write(key, target);
+
+  return this->target;
 }

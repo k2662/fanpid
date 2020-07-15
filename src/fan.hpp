@@ -15,5 +15,5 @@ class Fan {
 
     void init_control();
     void set_control_mode(bool value=true);
-    void set_target(double value);
+    double set_target(double value);
 };
