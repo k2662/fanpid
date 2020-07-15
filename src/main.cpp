@@ -21,7 +21,9 @@ int main(void)
 
   PIDController pidc(50.0, 500.0, 0.0, 0.0);
 
+  std::cerr << "Starting up..." << std::endl;
   Fan f0(0), f1(1);
+
   try {
     f0.init_control();
     f1.init_control();
