@@ -20,7 +20,12 @@ int main(void)
   }
 
   while (true) {
-    double cpu_temp = smc.read("TC0P");
+    double cpu_temp = 0.0;
+    cpu_temp += smc.read("TC1C");
+    cpu_temp += smc.read("TC2C");
+    cpu_temp += smc.read("TC3C");
+    cpu_temp += smc.read("TC4C");
+    cpu_temp /= 4.0;
     double fan_speed = pidc.get_ca(cpu_temp);
 
     std::cerr << cpu_temp << "ºC " << fan_speed << " RPM" << std::endl;
