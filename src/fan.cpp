@@ -46,7 +46,7 @@ void Fan::set_control_mode(bool value)
 double Fan::set_target(double target)
 {
   if (target < this->min)
-    target = this->min;
+    target = 0.0; //this->min;
 
   if (target > this->max)
     target = this->max;
