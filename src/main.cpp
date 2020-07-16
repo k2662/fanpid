@@ -78,7 +78,7 @@ int main(void)
 
     double f0_target = f0.set_target(fan_speed);
     double f1_target = f1.set_target(fan_speed);
-    std::cerr
+    std::cout
       << cpu_temp << ", "
       << double(smc.read("F0Ac")) << ", "
       << double(smc.read("F1Ac")) << ", "
