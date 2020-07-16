@@ -84,6 +84,7 @@ int main(void)
       << double(smc.read("F1Ac")) << ", "
       << f0_target << ", "
       << f1_target << ", "
+      << control_mode
       << std::endl;
 
     usleep(2000000);
