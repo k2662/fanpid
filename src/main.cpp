@@ -54,6 +54,7 @@ int main(void)
       reload_config.store(false);
       config = load_config();
       pidc.update(config);
+      std::cerr << "Config reloaded!" << std::endl;
     }
 
     double cpu_temp = 0.0;
