@@ -7,3 +7,4 @@ tests
 *_old*
 *.so
 fanpid
+.fanpid_config
