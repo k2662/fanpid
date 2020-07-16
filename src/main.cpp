@@ -8,13 +8,19 @@
 #include "fan.hpp"
 #include "pid.hpp"
 
-std::atomic<bool> running(true);
+std::atomic<bool> running(true), reload_config(false);
 
 void sighand(int signo)
 {
-  (void) signo;
-  running.store(false);
+  switch (signo) {
+    case SIGINT:
+      running.store(false);
+      break;
 
+    case SIGUSR1:
+      reload_config.store(true);
+      break;
+  }
 }
 
 int main(void)
@@ -39,9 +45,16 @@ int main(void)
   }
 
   signal(SIGINT, sighand);
+  signal(SIGUSR1, sighand);
 
   std::cerr << "Control begun!" << std::endl;
   while (running.load()) {
+
+    if (reload_config.load()) {
+      config = load_config();
+      pidc.update(config);
+    }
+
     double cpu_temp = 0.0;
     cpu_temp += smc.read("TC1C");
     cpu_temp += smc.read("TC2C");
