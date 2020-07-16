@@ -4,6 +4,7 @@
 
 #include <smcpp/smc.hpp>
 
+#include "config.hpp"
 #include "fan.hpp"
 #include "pid.hpp"
 
@@ -23,11 +24,14 @@ double interp(double T, double Tlo, double Thi, double Wlo, double Whi)
 
 int main(void)
 {
+  std::cerr << "Setting up controller." << std::endl;
   SMC smc;
 
-  PIDController pidc(50.0, 500.0, 0.0, 0.0);
+  auto config = load_config();
 
-  std::cerr << "Starting up..." << std::endl;
+  //PIDController pidc(50.0, 500.0, 0.0, 0.0);
+  PIDController pidc(config);
+
   Fan f0(0), f1(1);
 
   try {
@@ -41,6 +45,7 @@ int main(void)
 
   signal(SIGINT, sighand);
 
+  std::cerr << "Control begun!" << std::endl;
   while (running.load()) {
     double cpu_temp = 0.0;
     cpu_temp += smc.read("TC1C");
@@ -64,5 +69,6 @@ int main(void)
     usleep(2000000);
   }
 
-  std::cerr << "Fan controller exiting." << std::endl;
+  save_config(config);
+  std::cerr << "Exiting..." << std::endl;
 }
