@@ -1,6 +1,7 @@
 #pragma once
 
 #include <sys/time.h>
+#include "config.hpp"
 
 class PIDController {
 
@@ -12,6 +13,7 @@ class PIDController {
 
   public:
     PIDController(double setpoint, double kp=0.0, double ki=0.0, double kd=0.0);
+    PIDController(ControlConfig config);
     double get_ca(double measurement);
     void set_setpoint(double setpoint);
 };

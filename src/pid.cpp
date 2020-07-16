@@ -15,6 +15,19 @@ PIDController::PIDController(double setpoint, double kp, double ki, double kd)
   gettimeofday(&this->before, nullptr);
 }
 
+PIDController::PIDController(ControlConfig config)
+  : setpoint(config.setpoint),
+    KP(config.kp),
+    KI(config.ki),
+    KD(config.kd),
+    err(0.0),
+    perr(0.0),
+    d_err1(0.0),
+    d_err2(0.0),
+    pca(0.0)
+{
+  gettimeofday(&this->before, nullptr);
+}
 double PIDController::get_ca(double measurement)
 {
   gettimeofday(&this->after, nullptr);
