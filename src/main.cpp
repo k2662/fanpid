@@ -51,6 +51,7 @@ int main(void)
   while (running.load()) {
 
     if (reload_config.load()) {
+      reload_config.store(false);
       config = load_config();
       pidc.update(config);
     }
