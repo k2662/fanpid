@@ -16,4 +16,5 @@ class PIDController {
     PIDController(ControlConfig config);
     double get_ca(double measurement);
     void set_setpoint(double setpoint);
+    void update(ControlConfig config);
 };

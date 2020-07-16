@@ -28,6 +28,15 @@ PIDController::PIDController(ControlConfig config)
 {
   gettimeofday(&this->before, nullptr);
 }
+
+void PIDController::update(ControlConfig config)
+{
+  this->KP = config.kp;
+  this->KI = config.ki;
+  this->KD = config.kd;
+  this->setpoint = config.setpoint;
+}
+
 double PIDController::get_ca(double measurement)
 {
   gettimeofday(&this->after, nullptr);
