@@ -33,7 +33,7 @@ make
 Running the program as root with use the
 [PID](https://en.wikipedia.org/wiki/PID_controller) algorithm to set the fan speed.
 
-The PID parameters can be set in a config file in whatever directory you run
+The PID parameters can be set in a config file (".fanpid_config") in whatever directory you run
 fanpid from. The config file is very simple: key value pairs separated by
 colons.
 
